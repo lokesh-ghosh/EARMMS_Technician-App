@@ -2,17 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Technician App</title>
+    <title>EARMMS Technician</title>
     <style>
         html, body, body > div, #container, #container-uiarea {
             height: 100%;
+            margin: 0;
+            padding: 0;
         }
     </style>
     <script
         id="sap-ui-bootstrap"
-        src="resources/sap-ui-core.js"
+        src="https://ui5.sap.com/1.147.2/resources/sap-ui-core.js"
         data-sap-ui-theme="sap_horizon"
         data-sap-ui-resource-roots='{
             "com.wipro.earmms.technician.app.earmmstechnicianapp": "./"
@@ -23,7 +25,7 @@
         data-sap-ui-frame-options="trusted"
     ></script>
 </head>
-<body class="sapUiBody sapUiSizeCompact" id="content">
+<body class="sapUiBody sapUiSizeCozy" id="content">
     <div
         data-sap-ui-component
         data-name="com.wipro.earmms.technician.app.earmmstechnicianapp"

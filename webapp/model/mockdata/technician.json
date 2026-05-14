@@ -1,0 +1,15 @@
+{
+  "technicianId": "tech-001",
+  "name": "Jyoti Ranjan Rout",
+  "initials": "JR",
+  "email": "jyoti.rout@wipro.com",
+  "specialization": "Laptop",
+  "currentLoad": 8,
+  "stats": {
+    "total": 8,
+    "onTrack": 3,
+    "atRisk": 2,
+    "breached": 2,
+    "resolved": 1
+  }
+}

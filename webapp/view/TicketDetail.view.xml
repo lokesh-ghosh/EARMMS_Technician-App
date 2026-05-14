@@ -1,0 +1,217 @@
+<mvc:View
+    controllerName="com.wipro.earmms.technician.app.earmmstechnicianapp.controller.TicketDetail"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    displayBlock="true">
+
+    <Page
+        id="detailPage"
+        showHeader="false"
+        backgroundDesign="Solid"
+        class="earmmsBgPage detailPage">
+
+        <!-- ═══ HEADER ═══ -->
+        <customHeader>
+            <Bar class="earmmsGradientHeader" design="Header">
+                <contentLeft>
+                    <Button
+                        id="navBackBtn"
+                        icon="sap-icon://nav-back"
+                        type="Transparent"
+                        press=".onNavBack"
+                        tooltip="Back"/>
+                </contentLeft>
+                <contentMiddle>
+                    <VBox alignItems="Center">
+                        <Title text="{detailModel>/requestNumber}" level="H4"/>
+                        <ObjectStatus
+                            text="{parts:[{path:'detailModel>/status'}], formatter:'.formatter.statusDisplayText'}"
+                            state="{parts:[{path:'detailModel>/status'}], formatter:'.formatter.statusState'}"
+                            inverted="true"/>
+                    </VBox>
+                </contentMiddle>
+                <contentRight>
+                    <Button
+                        icon="sap-icon://edit"
+                        type="Transparent"
+                        press=".onUpdateStatus"
+                        visible="{parts:[{path:'detailModel>/status'}], formatter:'.formatter.isNotResolved'}"
+                        tooltip="Update Status"/>
+                </contentRight>
+            </Bar>
+        </customHeader>
+
+        <!-- ═══ ACTION FOOTER ═══ -->
+        <footer>
+            <Toolbar class="actionFooter" visible="{parts:[{path:'detailModel>/status'}], formatter:'.formatter.isNotResolved'}">
+                <ToolbarSpacer/>
+                <Button
+                    id="updateStatusBtn"
+                    text="Update Status"
+                    type="Default"
+                    icon="sap-icon://edit"
+                    press=".onUpdateStatus"
+                    class="sapUiSmallMarginEnd"/>
+                <Button
+                    id="resolveBtn"
+                    text="Resolve Ticket"
+                    type="Emphasized"
+                    icon="sap-icon://accept"
+                    press=".onResolveTicket"
+                    visible="{= ${detailModel>/status} === 'InProgress' }"/>
+                <ToolbarSpacer/>
+            </Toolbar>
+        </footer>
+
+        <content>
+
+            <!-- ── Status Progress ── -->
+            <VBox class="statusProgressWrap">
+                <core:HTML id="statusProgressHtml" content="{detailModel>/statusProgressHtml}"/>
+            </VBox>
+
+            <!-- ── SLA Highlight Card (gradient colour from inline style set by controller) ── -->
+            <VBox id="slaHighCard" class="slaHighCard slaCardOnTrack">
+                <HBox alignItems="Center" justifyContent="SpaceBetween">
+                    <VBox>
+                        <Text text="SLA STATUS" class="slaCardLabel"/>
+                        <HBox alignItems="Center">
+                            <core:Icon
+                                id="slaIcon"
+                                src="{parts:[{path:'detailModel>/slaStatus'}], formatter:'.formatter.slaIconSrc'}"
+                                color="#FFFFFF"
+                                size="1rem"
+                                class="sapUiTinyMarginEnd"/>
+                            <Text text="{detailModel>/slaStatus}" class="slaCardStatusText"/>
+                        </HBox>
+                        <Text
+                            text="{parts:[{path:'detailModel>/expectedResolutionTimestamp'},{path:'detailModel>/slaStatus'}], formatter:'.formatter.timeRemaining'}"
+                            class="slaCardTime"/>
+                    </VBox>
+                    <VBox alignItems="End">
+                        <Text text="Expected" class="slaCardLabel"/>
+                        <Text
+                            text="{parts:[{path:'detailModel>/expectedResolutionTimestamp'}], formatter:'.formatter.formatShortDate'}"
+                            class="slaCardStatusText"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+
+            <!-- ── Asset Information Card ── -->
+            <VBox class="infoCard">
+                <HBox class="infoCardHeader" alignItems="Center">
+                    <VBox class="infoCardIconWrap iconBlueBg">
+                        <core:Icon src="sap-icon://laptop" color="#0057D6" size="0.95rem"/>
+                    </VBox>
+                    <Text text="ASSET INFORMATION" class="infoCardTitle sapUiTinyMarginBegin"/>
+                </HBox>
+                <VBox class="infoCardBody">
+                    <HBox class="infoRow">
+                        <Text text="Asset Tag"    class="infoLabel"/>
+                        <Text text="{detailModel>/asset/assetTag}" class="infoValue ticketNumber"/>
+                    </HBox>
+                    <HBox class="infoRow">
+                        <Text text="Type"         class="infoLabel"/>
+                        <Text text="{detailModel>/asset/assetType/typeName}" class="infoValue"/>
+                    </HBox>
+                    <HBox class="infoRow">
+                        <Text text="Make / Model" class="infoLabel"/>
+                        <Text text="{= ${detailModel>/asset/make} + ' ' + ${detailModel>/asset/model} }" class="infoValue"/>
+                    </HBox>
+                    <HBox class="infoRow">
+                        <Text text="Serial No."   class="infoLabel"/>
+                        <Text text="{detailModel>/asset/serialNumber}" class="infoValue"/>
+                    </HBox>
+                    <HBox class="infoRow">
+                        <Text text="Location"     class="infoLabel"/>
+                        <Text text="{detailModel>/asset/location}" class="infoValue"/>
+                    </HBox>
+                </VBox>
+            </VBox>
+
+            <!-- ── Issue Details Card ── -->
+            <VBox class="infoCard">
+                <HBox class="infoCardHeader" alignItems="Center">
+                    <VBox class="infoCardIconWrap iconPurpleBg">
+                        <core:Icon src="sap-icon://alert" color="#4527A0" size="0.95rem"/>
+                    </VBox>
+                    <Text text="ISSUE DETAILS" class="infoCardTitle sapUiTinyMarginBegin"/>
+                </HBox>
+                <VBox class="infoCardBody">
+                    <HBox class="infoRow">
+                        <Text text="Category"  class="infoLabel"/>
+                        <Text text="{detailModel>/issueCategory}" class="infoValue categoryPill"/>
+                    </HBox>
+                    <HBox class="infoRow">
+                        <Text text="Severity"  class="infoLabel"/>
+                        <ObjectStatus
+                            text="{detailModel>/severity}"
+                            state="{parts:[{path:'detailModel>/severity'}], formatter:'.formatter.severityState'}"
+                            inverted="true"/>
+                    </HBox>
+                    <HBox class="infoRow">
+                        <Text text="Raised On" class="infoLabel"/>
+                        <Text text="{parts:[{path:'detailModel>/raisedOn'}], formatter:'.formatter.formatDate'}" class="infoValue"/>
+                    </HBox>
+                    <VBox class="sapUiTinyMarginTop">
+                        <Text text="Description" class="infoLabel"/>
+                        <Text text="{detailModel>/issueDescription}" class="infoDescValue sapUiTinyMarginTop" wrapping="true"/>
+                    </VBox>
+                </VBox>
+            </VBox>
+
+            <!-- ── Requestor Card ── -->
+            <VBox class="infoCard">
+                <HBox class="infoCardHeader" alignItems="Center">
+                    <VBox class="infoCardIconWrap iconGreenBg">
+                        <core:Icon src="sap-icon://person-placeholder" color="#2E7D32" size="0.95rem"/>
+                    </VBox>
+                    <Text text="REQUESTOR" class="infoCardTitle sapUiTinyMarginBegin"/>
+                    <core:HTML
+                        content="&lt;span class='vipBadge sapUiSmallMarginBegin'&gt;&#9733; VIP&lt;/span&gt;"
+                        visible="{detailModel>/raisedBy/isVIP}"/>
+                </HBox>
+                <VBox class="infoCardBody">
+                    <HBox class="infoRow">
+                        <Text text="Name"        class="infoLabel"/>
+                        <Text text="{detailModel>/raisedBy/name}" class="infoValue"/>
+                    </HBox>
+                    <HBox class="infoRow">
+                        <Text text="Employee ID" class="infoLabel"/>
+                        <Text text="{detailModel>/raisedBy/employeeId}" class="infoValue ticketNumber"/>
+                    </HBox>
+                    <HBox class="infoRow">
+                        <Text text="Department"  class="infoLabel"/>
+                        <Text text="{detailModel>/raisedBy/department}" class="infoValue"/>
+                    </HBox>
+                    <HBox class="infoRow">
+                        <Text text="Designation" class="infoLabel"/>
+                        <Text text="{detailModel>/raisedBy/designation}" class="infoValue"/>
+                    </HBox>
+                    <HBox class="infoRow">
+                        <Text text="Email"       class="infoLabel"/>
+                        <Link text="{detailModel>/raisedBy/email}" href="mailto:{detailModel>/raisedBy/email}" class="infoValue"/>
+                    </HBox>
+                </VBox>
+            </VBox>
+
+            <!-- ── Resolution Card (shown when Resolved or Closed) ── -->
+            <VBox class="resolutionCard" visible="{parts:[{path:'detailModel>/status'}], formatter:'.formatter.isResolved'}">
+                <core:HTML content="&lt;span class='resolvedTag'&gt;&#10003; Ticket Resolved&lt;/span&gt;"/>
+                <HBox class="infoRow">
+                    <Text text="Resolved On" class="infoLabel"/>
+                    <Text text="{parts:[{path:'detailModel>/actualResolutionTimestamp'}], formatter:'.formatter.formatDate'}" class="infoValue"/>
+                </HBox>
+                <VBox class="sapUiTinyMarginTop">
+                    <Text text="Resolution Notes" class="infoLabel"/>
+                    <Text text="{detailModel>/resolutionNotes}" class="resolutionText sapUiTinyMarginTop" wrapping="true"/>
+                </VBox>
+            </VBox>
+
+            <!-- Bottom spacer -->
+            <VBox height="2rem"/>
+
+        </content>
+    </Page>
+</mvc:View>

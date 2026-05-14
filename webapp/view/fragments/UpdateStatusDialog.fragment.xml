@@ -1,0 +1,58 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+
+    <Dialog
+        id="updateStatusDialog"
+        title="Update Ticket Status"
+        class="updateStatusDialog"
+        contentWidth="340px"
+        resizable="false"
+        draggable="false">
+
+        <content>
+            <VBox class="sapUiSmallMarginBeginEnd sapUiMediumMarginTopBottom">
+
+                <Label text="Current Status" class="sapUiTinyMarginBottom" required="false"/>
+                <ObjectStatus
+                    id="currentStatusDisplay"
+                    text="{parts:[{path:'detailModel>/status'}], formatter:'.formatter.statusDisplayText'}"
+                    state="{parts:[{path:'detailModel>/status'}], formatter:'.formatter.statusState'}"
+                    inverted="true"
+                    class="sapUiSmallMarginBottom"/>
+
+                <Label text="New Status" required="true" class="sapUiSmallMarginTop sapUiTinyMarginBottom"/>
+                <Select
+                    id="newStatusSelect"
+                    width="100%"
+                    items="{detailModel>/nextStatusOptions}">
+                    <core:Item key="{detailModel>key}" text="{detailModel>text}"/>
+                </Select>
+
+                <Label text="Notes (optional)" class="sapUiSmallMarginTop sapUiTinyMarginBottom"/>
+                <TextArea
+                    id="statusNotes"
+                    rows="3"
+                    growing="false"
+                    width="100%"
+                    placeholder="Add notes about this status change..."/>
+
+            </VBox>
+        </content>
+
+        <beginButton>
+            <Button
+                text="Update"
+                type="Emphasized"
+                press=".onConfirmStatusUpdate"/>
+        </beginButton>
+        <endButton>
+            <Button
+                text="Cancel"
+                type="Default"
+                press=".onCancelStatusUpdate"/>
+        </endButton>
+
+    </Dialog>
+
+</core:FragmentDefinition>

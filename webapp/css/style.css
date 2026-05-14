@@ -1,1 +1,386 @@
-/* Enter your custom styles here */
+/* =====================================================
+   EARMMS Technician App – Modern Design System
+   SAP Fiori / UI5 Custom Stylesheet
+   ===================================================== */
+
+/* ── Page & Background ── */
+.earmmsBgPage > .sapMPageScroll,
+.earmmsBgPage > .sapMPageScrollContent {
+    background-color: #F2F4F8 !important;
+}
+
+/* ── Gradient Header ── */
+.earmmsGradientHeader {
+    background: linear-gradient(135deg, #002E6E 0%, #0057D6 100%) !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25) !important;
+}
+.earmmsGradientHeader .sapMTitle,
+.earmmsGradientHeader .sapMText,
+.earmmsGradientHeader .sapMBtnIcon,
+.earmmsGradientHeader .sapMBtnContent {
+    color: #FFFFFF !important;
+}
+
+/* ── Summary KPI Strip (sits inside header gradient) ── */
+.summaryStrip {
+    background: linear-gradient(135deg, #002E6E 0%, #0057D6 100%);
+    padding: 0 1rem 1.1rem 1rem;
+    display: flex;
+    gap: 0.6rem;
+}
+.kpiCard {
+    flex: 1;
+    background: rgba(255,255,255,0.13);
+    border-radius: 10px;
+    padding: 0.65rem 0.5rem;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.22);
+    backdrop-filter: blur(4px);
+}
+.kpiNumber {
+    display: block;
+    font-size: 1.55rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    line-height: 1.1;
+}
+.kpiLabel {
+    display: block;
+    font-size: 0.6rem;
+    color: rgba(255,255,255,0.78);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 0.2rem;
+}
+.kpiAtRisk  .kpiNumber { color: #FFD54F; }
+.kpiBreached .kpiNumber { color: #FF8A65; }
+
+/* ── List item reset ── */
+.earmmsList > .sapMListItems > .sapMLIB,
+.earmmsList > .sapMListUl > .sapMLIB {
+    background: transparent !important;
+    border-bottom: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.earmmsList > .sapMListItems > .sapMLIB:hover,
+.earmmsList > .sapMListUl > .sapMLIB:hover {
+    background: transparent !important;
+}
+.earmmsList > .sapMListItems > .sapMLIB-sapMCustomLI,
+.earmmsList > .sapMListUl > .sapMLIB-sapMCustomLI {
+    padding: 0 !important;
+}
+
+/* ── Ticket Card ── */
+.ticketCard {
+    background: #FFFFFF;
+    border-radius: 10px;
+    margin: 0.4rem 0.85rem;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.09), 0 1px 2px rgba(0,0,0,0.05);
+    transition: box-shadow 0.18s, transform 0.12s;
+    cursor: pointer;
+    border-left: 4px solid transparent;
+}
+.ticketCard:active { transform: scale(0.985); box-shadow: 0 1px 2px rgba(0,0,0,0.07); }
+
+.slaOnTrack  { border-left-color: #107E3E !important; }
+.slaAtRisk   { border-left-color: #E65100 !important; }
+.slaBreached {
+    border-left-color: #C62828 !important;
+    animation: pulseBorder 2s ease-in-out infinite;
+}
+@keyframes pulseBorder {
+    0%, 100% { border-left-color: #C62828; }
+    50%       { border-left-color: #FF5252; }
+}
+
+.ticketCardInner { padding: 0.7rem 0.85rem; }
+
+/* ── Ticket Number ── */
+.ticketNumber {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #0057D6;
+    font-family: 'Courier New', monospace;
+}
+
+/* ── Severity / SLA / Status Badges ── */
+.badgeBase {
+    display: inline-block;
+    border-radius: 4px;
+    padding: 0.1rem 0.45rem;
+    font-size: 0.64rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    line-height: 1.5;
+}
+.badgeHigh     { background:#FFEBEE; color:#C62828; border:1px solid #EF9A9A; }
+.badgeMedium   { background:#FFF3E0; color:#E65100; border:1px solid #FFB74D; }
+.badgeLow      { background:#E8F5E9; color:#2E7D32; border:1px solid #A5D6A7; }
+.badgeOnTrack  { background:#E8F5E9; color:#1B5E20; border:1px solid #A5D6A7; }
+.badgeAtRisk   { background:#FFF8E1; color:#E65100; border:1px solid #FFE082; }
+.badgeBreached { background:#FFEBEE; color:#B71C1C; border:1px solid #EF9A9A; }
+.badgeOpen     { background:#F5F5F5; color:#424242; border:1px solid #E0E0E0; }
+.badgeAssigned { background:#E3F2FD; color:#1565C0; border:1px solid #90CAF9; }
+.badgeInProgress { background:#EDE7F6; color:#4527A0; border:1px solid #CE93D8; }
+.badgeResolved { background:#E8F5E9; color:#1B5E20; border:1px solid #A5D6A7; }
+.badgeClosed   { background:#F5F5F5; color:#616161; border:1px solid #BDBDBD; }
+
+/* ── Asset Row ── */
+.assetTag {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #1D2D3E;
+}
+.assetModel {
+    font-size: 0.74rem;
+    color: #6A6D70;
+}
+.categoryPill {
+    font-size: 0.68rem;
+    background: #EEF2FF;
+    color: #3730A3;
+    border-radius: 20px;
+    padding: 0.15rem 0.55rem;
+    border: 1px solid #C7D2FE;
+}
+
+/* ── Description ── */
+.ticketDescription {
+    font-size: 0.8rem;
+    color: #6A6D70;
+    line-height: 1.45;
+}
+
+/* ── Ticket Footer Row ── */
+.ticketFooter {
+    border-top: 1px solid #F2F2F2;
+    padding-top: 0.45rem;
+    margin-top: 0.45rem;
+}
+.timeInfo    { font-size: 0.73rem; color: #6A6D70; }
+.timeOnTrack { color: #2E7D32; font-weight: 500; }
+.timeAtRisk  { color: #E65100; font-weight: 600; }
+.timeBreached { color: #C62828; font-weight: 700; }
+
+/* ── Empty State ── */
+.emptyStateContainer {
+    text-align: center;
+    padding: 4rem 1.5rem;
+}
+.emptyStateIcon { font-size: 3rem; color: #BDBDBD; display: block; margin-bottom: 1rem; }
+.emptyStateTitle { font-size: 1rem; color: #424242; font-weight: 600; display: block; margin-bottom: 0.4rem; }
+.emptyStateMsg   { font-size: 0.82rem; color: #9E9E9E; }
+
+/* ── VIP Badge ── */
+.vipBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    background: linear-gradient(90deg, #FFD700, #FFA000);
+    color: #4A2E00;
+    border-radius: 20px;
+    padding: 0.15rem 0.6rem;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+
+/* ── Detail Page ── */
+.detailPage { background-color: #F2F4F8 !important; }
+
+/* ── Status Progress ── */
+.statusProgressWrap {
+    background: #FFFFFF;
+    padding: 1rem 0.5rem 0.8rem;
+    border-radius: 10px;
+    margin: 0.4rem 0.85rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.07);
+}
+.progressStepWrap {
+    flex: 1;
+    text-align: center;
+    position: relative;
+}
+.progressLine {
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    width: 100%;
+    height: 2px;
+    background: #E0E0E0;
+    z-index: 0;
+}
+.progressLineDone { background: #0057D6; }
+.stepCircle {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #E0E0E0;
+    color: #9E9E9E;
+    font-size: 0.65rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 0.3rem;
+}
+.stepCircle.stepDone    { background: #0057D6; color: #FFF; }
+.stepCircle.stepCurrent { background: #002E6E; color: #FFF; box-shadow: 0 0 0 3px rgba(0,87,214,0.25); }
+.stepCircleLabel {
+    font-size: 0.6rem;
+    color: #9E9E9E;
+    display: block;
+    line-height: 1.2;
+}
+.stepCircleLabel.done    { color: #0057D6; }
+.stepCircleLabel.current { color: #002E6E; font-weight: 600; }
+
+/* ── Info Cards (Detail view) ── */
+.infoCard {
+    background: #FFFFFF;
+    border-radius: 10px;
+    margin: 0.4rem 0.85rem;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.07);
+}
+.infoCardHeader {
+    padding: 0.65rem 1rem 0.5rem;
+    border-bottom: 1px solid #F3F3F3;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.infoCardIconWrap {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+}
+.iconBlueBg  { background: #E3F2FD; }
+.iconGreenBg { background: #E8F5E9; }
+.iconPurpleBg { background: #EDE7F6; }
+.iconOrangeBg { background: #FFF3E0; }
+.infoCardTitle {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #1D2D3E;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+}
+.infoCardBody { padding: 0.5rem 1rem 0.8rem; }
+.infoRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid #F8F8F8;
+}
+.infoRow:last-child { border-bottom: none; }
+.infoLabel {
+    font-size: 0.73rem;
+    color: #8C8C8C;
+    font-weight: 500;
+    min-width: 38%;
+}
+.infoValue {
+    font-size: 0.78rem;
+    color: #1D2D3E;
+    font-weight: 500;
+    text-align: right;
+    max-width: 58%;
+    word-break: break-word;
+}
+.infoDescValue {
+    font-size: 0.78rem;
+    color: #3D3D3D;
+    line-height: 1.5;
+    margin-top: 0.3rem;
+}
+
+/* ── SLA Highlight Card ── */
+.slaHighCard {
+    border-radius: 10px;
+    margin: 0.4rem 0.85rem;
+    overflow: hidden;
+    padding: 1.1rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.13);
+}
+.slaCardOnTrack  { background: linear-gradient(135deg, #1B5E20, #2E7D32); }
+.slaCardAtRisk   { background: linear-gradient(135deg, #BF360C, #E65100); }
+.slaCardBreached { background: linear-gradient(135deg, #7B1515, #C62828); }
+
+.slaCardLabel {
+    font-size: 0.68rem;
+    color: rgba(255,255,255,0.75);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: block;
+    margin-bottom: 0.3rem;
+}
+.slaCardStatusText {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    display: block;
+}
+.slaCardTime {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.85);
+    display: block;
+    margin-top: 0.2rem;
+}
+.slaCardExpected {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.65);
+    margin-top: 0.6rem;
+    display: block;
+}
+
+/* ── Resolution Card ── */
+.resolutionCard {
+    background: #E8F5E9;
+    border-radius: 10px;
+    margin: 0.4rem 0.85rem;
+    padding: 1rem;
+    border: 1px solid #A5D6A7;
+}
+.resolvedTag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: #107E3E;
+    color: #FFF;
+    border-radius: 20px;
+    padding: 0.2rem 0.75rem;
+    font-size: 0.76rem;
+    font-weight: 600;
+    margin-bottom: 0.65rem;
+}
+.resolutionText {
+    font-size: 0.8rem;
+    color: #1B5E20;
+    line-height: 1.5;
+}
+
+/* ── Action Footer ── */
+.actionFooter { background: #FFFFFF; border-top: 1px solid #E5E5E5; }
+
+/* ── Dialog ── */
+.updateStatusDialog .sapMDialogHeader { background: #0057D6; }
+.updateStatusDialog .sapMDialogHeader .sapMTitle { color: #FFF; }
+
+/* ── Responsive ── */
+@media (min-width: 600px) {
+    .ticketCard, .infoCard, .slaHighCard, .statusProgressWrap, .resolutionCard {
+        max-width: 640px;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+    .summaryStrip { max-width: 640px; margin: 0 auto; }
+}

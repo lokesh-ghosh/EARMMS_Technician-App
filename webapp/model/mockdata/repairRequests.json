@@ -1,0 +1,252 @@
+{
+  "repairRequests": [
+    {
+      "requestId": "req-001",
+      "requestNumber": "RR-2026-00001",
+      "asset": {
+        "assetId": "asset-001",
+        "assetTag": "LAP-2026-0451",
+        "assetType": { "typeId": "LAPTOP", "typeName": "Laptop", "category": "IT", "isCritical": true },
+        "make": "Dell",
+        "model": "XPS 15",
+        "serialNumber": "DXP15-2024-001",
+        "location": "Building A, Floor 3, Desk 302"
+      },
+      "raisedBy": {
+        "employeeId": "EMP-0012",
+        "name": "Alice Johnson",
+        "email": "alice.johnson@company.com",
+        "department": "Finance",
+        "designation": "Senior Analyst",
+        "isVIP": true
+      },
+      "raisedOn": "2026-05-13T07:15:00",
+      "issueCategory": "Hardware",
+      "issueDescription": "Laptop screen is severely flickering with multiple dead pixel clusters across the display. Employee cannot use the laptop for any work. Screen also has a visible crack along the bottom edge.",
+      "severity": "High",
+      "photoUrl": "",
+      "status": "Assigned",
+      "expectedResolutionTimestamp": "2026-05-13T19:15:00",
+      "actualResolutionTimestamp": null,
+      "resolutionNotes": "",
+      "slaStatus": "Breached"
+    },
+    {
+      "requestId": "req-002",
+      "requestNumber": "RR-2026-00002",
+      "asset": {
+        "assetId": "asset-005",
+        "assetTag": "LAP-2026-0389",
+        "assetType": { "typeId": "LAPTOP", "typeName": "Laptop", "category": "IT", "isCritical": true },
+        "make": "HP",
+        "model": "EliteBook 840",
+        "serialNumber": "HEB840-2023-099",
+        "location": "Building B, Floor 1, Desk 112"
+      },
+      "raisedBy": {
+        "employeeId": "EMP-0034",
+        "name": "Robert Chen",
+        "email": "robert.chen@company.com",
+        "department": "Engineering",
+        "designation": "Lead Developer",
+        "isVIP": false
+      },
+      "raisedOn": "2026-05-13T11:30:00",
+      "issueCategory": "Hardware",
+      "issueDescription": "Laptop battery drains completely within 45 minutes even on low power mode. Device shuts down unexpectedly during critical meetings and video calls.",
+      "severity": "High",
+      "photoUrl": "",
+      "status": "Assigned",
+      "expectedResolutionTimestamp": "2026-05-13T23:30:00",
+      "actualResolutionTimestamp": null,
+      "resolutionNotes": "",
+      "slaStatus": "Breached"
+    },
+    {
+      "requestId": "req-003",
+      "requestNumber": "RR-2026-00003",
+      "asset": {
+        "assetId": "asset-012",
+        "assetTag": "LAP-2026-0502",
+        "assetType": { "typeId": "LAPTOP", "typeName": "Laptop", "category": "IT", "isCritical": true },
+        "make": "Lenovo",
+        "model": "ThinkPad X1 Carbon",
+        "serialNumber": "LTX1-2024-045",
+        "location": "Building A, Floor 5, Room 501"
+      },
+      "raisedBy": {
+        "employeeId": "EMP-0067",
+        "name": "Sarah Williams",
+        "email": "sarah.williams@company.com",
+        "department": "Marketing",
+        "designation": "Marketing Manager",
+        "isVIP": false
+      },
+      "raisedOn": "2026-05-14T06:00:00",
+      "issueCategory": "Physical Damage",
+      "issueDescription": "Laptop keyboard has multiple keys stuck and non-responsive. Keys J, K, L and spacebar are completely non-functional. Appears liquid was spilled on the keyboard.",
+      "severity": "Medium",
+      "photoUrl": "",
+      "status": "Assigned",
+      "expectedResolutionTimestamp": "2026-05-14T14:00:00",
+      "actualResolutionTimestamp": null,
+      "resolutionNotes": "",
+      "slaStatus": "AtRisk"
+    },
+    {
+      "requestId": "req-004",
+      "requestNumber": "RR-2026-00004",
+      "asset": {
+        "assetId": "asset-018",
+        "assetTag": "LAP-2026-0421",
+        "assetType": { "typeId": "LAPTOP", "typeName": "Laptop", "category": "IT", "isCritical": false },
+        "make": "Apple",
+        "model": "MacBook Pro 14",
+        "serialNumber": "AMBP14-2024-012",
+        "location": "Building C, Floor 2, Open Floor"
+      },
+      "raisedBy": {
+        "employeeId": "EMP-0089",
+        "name": "Marcus Thompson",
+        "email": "marcus.thompson@company.com",
+        "department": "Design",
+        "designation": "UI Designer",
+        "isVIP": false
+      },
+      "raisedOn": "2026-05-14T07:45:00",
+      "issueCategory": "Software",
+      "issueDescription": "System crashes every 15-20 minutes with kernel panic error. Multiple applications freeze simultaneously. Error logs show memory allocation failures. Design deadlines are being impacted.",
+      "severity": "Medium",
+      "photoUrl": "",
+      "status": "InProgress",
+      "expectedResolutionTimestamp": "2026-05-14T15:45:00",
+      "actualResolutionTimestamp": null,
+      "resolutionNotes": "",
+      "slaStatus": "AtRisk"
+    },
+    {
+      "requestId": "req-005",
+      "requestNumber": "RR-2026-00005",
+      "asset": {
+        "assetId": "asset-023",
+        "assetTag": "LAP-2026-0478",
+        "assetType": { "typeId": "LAPTOP", "typeName": "Laptop", "category": "IT", "isCritical": false },
+        "make": "Dell",
+        "model": "Latitude 5520",
+        "serialNumber": "DL5520-2023-078",
+        "location": "Building A, Floor 2, Desk 215"
+      },
+      "raisedBy": {
+        "employeeId": "EMP-0103",
+        "name": "Emily Davis",
+        "email": "emily.davis@company.com",
+        "department": "Operations",
+        "designation": "Operations Analyst",
+        "isVIP": false
+      },
+      "raisedOn": "2026-05-14T08:30:00",
+      "issueCategory": "Hardware",
+      "issueDescription": "Laptop overheating causing throttling and performance issues. Cooling fan making loud grinding noises. Surface temperature extremely hot even during light usage.",
+      "severity": "Medium",
+      "photoUrl": "",
+      "status": "Assigned",
+      "expectedResolutionTimestamp": "2026-05-14T20:30:00",
+      "actualResolutionTimestamp": null,
+      "resolutionNotes": "",
+      "slaStatus": "OnTrack"
+    },
+    {
+      "requestId": "req-006",
+      "requestNumber": "RR-2026-00006",
+      "asset": {
+        "assetId": "asset-031",
+        "assetTag": "LAP-2026-0334",
+        "assetType": { "typeId": "LAPTOP", "typeName": "Laptop", "category": "IT", "isCritical": false },
+        "make": "HP",
+        "model": "ProBook 450",
+        "serialNumber": "HPB450-2022-056",
+        "location": "Building B, Floor 3, Desk 345"
+      },
+      "raisedBy": {
+        "employeeId": "EMP-0145",
+        "name": "Daniel Kim",
+        "email": "daniel.kim@company.com",
+        "department": "HR",
+        "designation": "HR Specialist",
+        "isVIP": false
+      },
+      "raisedOn": "2026-05-14T09:00:00",
+      "issueCategory": "Hardware",
+      "issueDescription": "Laptop port (USB-A) is physically broken and non-functional. Charging port is also loose causing intermittent charging issues. Device falls to safe mode occasionally.",
+      "severity": "Low",
+      "photoUrl": "",
+      "status": "Assigned",
+      "expectedResolutionTimestamp": "2026-05-15T09:00:00",
+      "actualResolutionTimestamp": null,
+      "resolutionNotes": "",
+      "slaStatus": "OnTrack"
+    },
+    {
+      "requestId": "req-007",
+      "requestNumber": "RR-2026-00007",
+      "asset": {
+        "assetId": "asset-042",
+        "assetTag": "LAP-2026-0298",
+        "assetType": { "typeId": "LAPTOP", "typeName": "Laptop", "category": "IT", "isCritical": false },
+        "make": "Lenovo",
+        "model": "IdeaPad 5",
+        "serialNumber": "LIP5-2023-034",
+        "location": "Building C, Floor 1, Desk 110"
+      },
+      "raisedBy": {
+        "employeeId": "EMP-0178",
+        "name": "Jennifer Lee",
+        "email": "jennifer.lee@company.com",
+        "department": "Sales",
+        "designation": "Account Executive",
+        "isVIP": false
+      },
+      "raisedOn": "2026-05-14T09:30:00",
+      "issueCategory": "Software",
+      "issueDescription": "Laptop is unable to connect to corporate VPN. Error message shows authentication failure. Employee cannot access internal systems and work from home is fully blocked.",
+      "severity": "Low",
+      "photoUrl": "",
+      "status": "InProgress",
+      "expectedResolutionTimestamp": "2026-05-15T17:30:00",
+      "actualResolutionTimestamp": null,
+      "resolutionNotes": "",
+      "slaStatus": "OnTrack"
+    },
+    {
+      "requestId": "req-008",
+      "requestNumber": "RR-2026-00008",
+      "asset": {
+        "assetId": "asset-055",
+        "assetTag": "LAP-2026-0412",
+        "assetType": { "typeId": "LAPTOP", "typeName": "Laptop", "category": "IT", "isCritical": true },
+        "make": "Dell",
+        "model": "XPS 13",
+        "serialNumber": "DXP13-2024-067",
+        "location": "Building A, Floor 4, Room 401"
+      },
+      "raisedBy": {
+        "employeeId": "EMP-0201",
+        "name": "Thomas Anderson",
+        "email": "thomas.anderson@company.com",
+        "department": "Executive",
+        "designation": "VP of Finance",
+        "isVIP": true
+      },
+      "raisedOn": "2026-05-12T14:00:00",
+      "issueCategory": "Hardware",
+      "issueDescription": "Laptop audio completely non-functional. No sound from speakers or headphone jack. Driver reinstallation did not resolve issue. Hardware fault suspected.",
+      "severity": "Medium",
+      "photoUrl": "",
+      "status": "Resolved",
+      "expectedResolutionTimestamp": "2026-05-13T02:00:00",
+      "actualResolutionTimestamp": "2026-05-13T16:45:00",
+      "resolutionNotes": "Replaced faulty audio hardware module. Installed latest audio drivers. Tested with multiple audio devices. All functionality confirmed restored.",
+      "slaStatus": "Breached"
+    }
+  ]
+}

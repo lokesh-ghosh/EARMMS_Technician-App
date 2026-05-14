@@ -1,0 +1,157 @@
+<mvc:View
+    controllerName="com.wipro.earmms.technician.app.earmmstechnicianapp.controller.WorkQueue"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    displayBlock="true">
+
+    <Page
+        id="workQueuePage"
+        showHeader="false"
+        backgroundDesign="Solid"
+        class="earmmsBgPage">
+
+        <!-- ═══ CUSTOM HEADER ═══ -->
+        <customHeader>
+            <Bar class="earmmsGradientHeader" design="Header">
+                <contentLeft>
+                    <Title text="EARMMS" level="H5" wrapping="false"/>
+                </contentLeft>
+                <contentMiddle>
+                    <Title text="My Work Queue" level="H4"/>
+                </contentMiddle>
+                <contentRight>
+                    <Button
+                        icon="sap-icon://refresh"
+                        type="Transparent"
+                        press=".onRefresh"
+                        tooltip="Refresh"/>
+                    <Avatar
+                        id="techAvatar"
+                        initials="{technician>/initials}"
+                        size="XS"
+                        displayShape="Square"
+                        backgroundColor="Accent6"
+                        press=".onProfilePress"
+                        class="sapUiTinyMarginBegin"
+                        tooltip="{technician>/name}"/>
+                </contentRight>
+            </Bar>
+        </customHeader>
+
+        <content>
+
+            <!-- KPI Strip (HTML rendered by controller) -->
+            <core:HTML id="kpiStrip" content="{viewModel>/kpiHtml}"/>
+
+            <!-- Search Field -->
+            <SearchField
+                id="searchField"
+                placeholder="Search ticket, asset or employee..."
+                liveChange=".onSearch"
+                search=".onSearch"
+                class="sapUiSmallMarginTopBottom sapUiSmallMarginBeginEnd"/>
+
+            <!-- Filter Tab Bar -->
+            <IconTabBar
+                id="filterTabBar"
+                select=".onFilterSelect"
+                expandable="false"
+                backgroundDesign="Transparent"
+                tabDensityMode="Compact">
+                <items>
+                    <IconTabFilter text="All"      key="All"      count="{= '' + ${technician>/stats/total} }"/>
+                    <IconTabFilter text="On Track" key="OnTrack"  iconColor="Positive" count="{= '' + ${technician>/stats/onTrack} }"/>
+                    <IconTabFilter text="At Risk"  key="AtRisk"   iconColor="Critical" count="{= '' + ${technician>/stats/atRisk} }"/>
+                    <IconTabFilter text="Breached" key="Breached" iconColor="Negative" count="{= '' + ${technician>/stats/breached} }"/>
+                </items>
+
+                <content>
+                    <!-- Ticket List -->
+                    <List
+                        id="ticketList"
+                        items="{viewModel>/filteredRequests}"
+                        showSeparators="None"
+                        growing="false"
+                        class="earmmsList">
+
+                        <items>
+                            <CustomListItem press=".onTicketPress" type="Active">
+
+                                <!-- Card wrapper – dynamic left-border colour from SLA class -->
+                                <VBox class="{= 'ticketCard ' + (${viewModel>slaStatus} === 'Breached' ? 'slaBreached' : (${viewModel>slaStatus} === 'AtRisk' ? 'slaAtRisk' : 'slaOnTrack')) }">
+                                    <VBox class="ticketCardInner">
+
+                                        <!-- Row 1: Ticket number   |   Severity badge   |   SLA badge -->
+                                        <HBox alignItems="Center" justifyContent="SpaceBetween" class="sapUiTinyMarginBottom">
+                                            <HBox alignItems="Center">
+                                                <Text text="{viewModel>requestNumber}" class="ticketNumber" wrapping="false"/>
+                                                <ObjectStatus
+                                                    text="{viewModel>severity}"
+                                                    state="{parts:[{path:'viewModel>severity'}], formatter:'.formatter.severityState'}"
+                                                    inverted="true"
+                                                    class="sapUiSmallMarginBegin"/>
+                                            </HBox>
+                                            <ObjectStatus
+                                                text="{viewModel>slaStatus}"
+                                                state="{parts:[{path:'viewModel>slaStatus'}], formatter:'.formatter.slaStatusState'}"
+                                                inverted="false"/>
+                                        </HBox>
+
+                                        <!-- Row 2: Asset icon · Tag · Make/Model  |  Category pill -->
+                                        <HBox alignItems="Center" justifyContent="SpaceBetween" class="sapUiTinyMarginBottom">
+                                            <HBox alignItems="Center">
+                                                <core:Icon src="sap-icon://laptop" color="#0057D6" size="0.88rem" class="sapUiSmallMarginEnd"/>
+                                                <Text text="{viewModel>asset/assetTag}" class="assetTag" wrapping="false"/>
+                                                <Text text=" · " class="assetModel" wrapping="false"/>
+                                                <Text text="{= ${viewModel>asset/make} + ' ' + ${viewModel>asset/model} }" class="assetModel" wrapping="false"/>
+                                            </HBox>
+                                            <Text text="{viewModel>issueCategory}" class="categoryPill" wrapping="false"/>
+                                        </HBox>
+
+                                        <!-- Row 3: Issue description (2 lines max) -->
+                                        <Text
+                                            text="{viewModel>issueDescription}"
+                                            class="ticketDescription sapUiTinyMarginBottom"
+                                            maxLines="2"
+                                            wrapping="true"/>
+
+                                        <!-- Row 4: SLA time remaining  |  Ticket status badge -->
+                                        <HBox alignItems="Center" justifyContent="SpaceBetween" class="ticketFooter">
+                                            <HBox alignItems="Center">
+                                                <core:Icon
+                                                    src="{parts:[{path:'viewModel>slaStatus'}], formatter:'.formatter.slaIconSrc'}"
+                                                    color="{parts:[{path:'viewModel>slaStatus'}], formatter:'.formatter.slaIconColor'}"
+                                                    size="0.78rem"
+                                                    class="sapUiTinyMarginEnd"/>
+                                                <Text
+                                                    text="{parts:[{path:'viewModel>expectedResolutionTimestamp'},{path:'viewModel>slaStatus'}], formatter:'.formatter.timeRemaining'}"
+                                                    class="{parts:[{path:'viewModel>slaStatus'}], formatter:'.formatter.timeRemainingClass'}"
+                                                    wrapping="false"/>
+                                            </HBox>
+                                            <ObjectStatus
+                                                text="{parts:[{path:'viewModel>status'}], formatter:'.formatter.statusDisplayText'}"
+                                                state="{parts:[{path:'viewModel>status'}], formatter:'.formatter.statusState'}"/>
+                                        </HBox>
+
+                                    </VBox>
+                                </VBox>
+
+                            </CustomListItem>
+                        </items>
+
+                        <noData>
+                            <VBox class="emptyStateContainer" alignItems="Center">
+                                <core:Icon src="sap-icon://employee-approvals" size="3.5rem" color="#BDBDBD"/>
+                                <Title text="All Caught Up!" level="H4" class="sapUiSmallMarginTop"/>
+                                <Text text="No tickets match the current filter." class="sapUiTinyMarginTop"/>
+                            </VBox>
+                        </noData>
+
+                    </List>
+                </content>
+            </IconTabBar>
+
+        </content>
+    </Page>
+</mvc:View>
