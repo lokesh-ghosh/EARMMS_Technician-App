@@ -3,6 +3,7 @@
     {
       "requestId": "req-001",
       "requestNumber": "RR-2026-00001",
+      "assignedTechnician_technicianId": "tech-001",
       "asset": {
         "assetId": "asset-001",
         "assetTag": "LAP-2026-0451",
@@ -34,6 +35,7 @@
     {
       "requestId": "req-002",
       "requestNumber": "RR-2026-00002",
+      "assignedTechnician_technicianId": "tech-001",
       "asset": {
         "assetId": "asset-005",
         "assetTag": "LAP-2026-0389",
@@ -65,6 +67,7 @@
     {
       "requestId": "req-003",
       "requestNumber": "RR-2026-00003",
+      "assignedTechnician_technicianId": "tech-001",
       "asset": {
         "assetId": "asset-012",
         "assetTag": "LAP-2026-0502",
@@ -96,6 +99,7 @@
     {
       "requestId": "req-004",
       "requestNumber": "RR-2026-00004",
+      "assignedTechnician_technicianId": "tech-001",
       "asset": {
         "assetId": "asset-018",
         "assetTag": "LAP-2026-0421",
@@ -127,6 +131,7 @@
     {
       "requestId": "req-005",
       "requestNumber": "RR-2026-00005",
+      "assignedTechnician_technicianId": "tech-001",
       "asset": {
         "assetId": "asset-023",
         "assetTag": "LAP-2026-0478",
@@ -158,6 +163,7 @@
     {
       "requestId": "req-006",
       "requestNumber": "RR-2026-00006",
+      "assignedTechnician_technicianId": "tech-001",
       "asset": {
         "assetId": "asset-031",
         "assetTag": "LAP-2026-0334",
@@ -189,6 +195,7 @@
     {
       "requestId": "req-007",
       "requestNumber": "RR-2026-00007",
+      "assignedTechnician_technicianId": "tech-001",
       "asset": {
         "assetId": "asset-042",
         "assetTag": "LAP-2026-0298",
@@ -220,6 +227,7 @@
     {
       "requestId": "req-008",
       "requestNumber": "RR-2026-00008",
+      "assignedTechnician_technicianId": "tech-001",
       "asset": {
         "assetId": "asset-055",
         "assetTag": "LAP-2026-0412",
@@ -247,6 +255,70 @@
       "actualResolutionTimestamp": "2026-05-13T16:45:00",
       "resolutionNotes": "Replaced faulty audio hardware module. Installed latest audio drivers. Tested with multiple audio devices. All functionality confirmed restored.",
       "slaStatus": "Breached"
+    },
+    {
+      "requestId": "req-009",
+      "requestNumber": "RR-2026-00009",
+      "assignedTechnician_technicianId": "tech-002",
+      "asset": {
+        "assetId": "asset-061",
+        "assetTag": "MON-2026-0112",
+        "assetType": { "typeId": "MONITOR", "typeName": "Monitor", "category": "IT", "isCritical": false },
+        "make": "Samsung",
+        "model": "27\" QHD",
+        "serialNumber": "SAM27Q-2023-018",
+        "location": "Building D, Floor 1, Desk 102"
+      },
+      "raisedBy": {
+        "employeeId": "EMP-0256",
+        "name": "Priya Sharma",
+        "email": "priya.sharma@company.com",
+        "department": "IT",
+        "designation": "Systems Administrator",
+        "isVIP": false
+      },
+      "raisedOn": "2026-05-14T10:00:00",
+      "issueCategory": "Hardware",
+      "issueDescription": "External monitor not detected by docking station. Display port cable and drivers already replaced with no resolution.",
+      "severity": "Low",
+      "photoUrl": "",
+      "status": "Assigned",
+      "expectedResolutionTimestamp": "2026-05-16T10:00:00",
+      "actualResolutionTimestamp": null,
+      "resolutionNotes": "",
+      "slaStatus": "OnTrack"
+    },
+    {
+      "requestId": "req-010",
+      "requestNumber": "RR-2026-00010",
+      "assignedTechnician_technicianId": "tech-002",
+      "asset": {
+        "assetId": "asset-072",
+        "assetTag": "LAP-2026-0519",
+        "assetType": { "typeId": "LAPTOP", "typeName": "Laptop", "category": "IT", "isCritical": false },
+        "make": "Lenovo",
+        "model": "ThinkPad E15",
+        "serialNumber": "LTE15-2024-089",
+        "location": "Building B, Floor 2, Desk 220"
+      },
+      "raisedBy": {
+        "employeeId": "EMP-0302",
+        "name": "Amit Patel",
+        "email": "amit.patel@company.com",
+        "department": "Finance",
+        "designation": "Finance Analyst",
+        "isVIP": false
+      },
+      "raisedOn": "2026-05-14T10:30:00",
+      "issueCategory": "Software",
+      "issueDescription": "Excel and Word applications crashing on startup after recent Windows update. Rollback attempted but issue persists.",
+      "severity": "Medium",
+      "photoUrl": "",
+      "status": "Assigned",
+      "expectedResolutionTimestamp": "2026-05-14T22:30:00",
+      "actualResolutionTimestamp": null,
+      "resolutionNotes": "",
+      "slaStatus": "OnTrack"
     }
   ]
 }

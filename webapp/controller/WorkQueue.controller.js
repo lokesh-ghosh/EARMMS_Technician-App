@@ -14,13 +14,7 @@ sap.ui.define([
             this._sCurrentFilter = "All";
             this._sSearchText = "";
 
-            const oViewModel = new JSONModel({
-                busy: false,
-                filteredRequests: [],
-                kpiHtml: ""
-            });
-            this.setModel(oViewModel, "viewModel");
-
+            this.setModel(new JSONModel({ busy: false, filteredRequests: [], kpiHtml: "" }), "viewModel");
             this.getRouter().getRoute("workQueue").attachPatternMatched(this._onRouteMatched, this);
         },
 
@@ -29,56 +23,71 @@ sap.ui.define([
         },
 
         _loadData() {
-            const oRepairModel = this.getOwnerComponent().getModel("repair");
-            const oTechModel = this.getOwnerComponent().getModel("technician");
+            const oRepairModel   = this.getOwnerComponent().getModel("repair");
+            const oTechModel     = this.getOwnerComponent().getModel("technician");
+            if (!oRepairModel || !oTechModel) return;
 
-            if (!oRepairModel) return;
+            // ── Filter to the logged-in technician's own tickets ──────────────
+            const sTechId    = oTechModel.getProperty("/technicianId");
+            const aAllRequests = oRepairModel.getProperty("/repairRequests") || [];
+            const aMyRequests  = aAllRequests.filter(
+                r => r.assignedTechnician_technicianId === sTechId
+            );
 
-            const aRequests = oRepairModel.getProperty("/repairRequests") || [];
-            this._allRequests = this._sortBySla(aRequests);
+            this._allMyRequests = this._sortBySla(aMyRequests);
+
+            // Recompute stats from this technician's own tickets only
+            const oStats = this._computeStats(this._allMyRequests);
+            oTechModel.setProperty("/stats", oStats);
+
             this._applyFilter();
-            this._buildKpiHtml(oTechModel.getProperty("/stats"));
+            this._buildKpiHtml(oStats, oTechModel.getProperty("/name"));
+        },
+
+        _computeStats(aRequests) {
+            return {
+                total:    aRequests.length,
+                onTrack:  aRequests.filter(r => r.slaStatus === "OnTrack"  && r.status !== "Resolved" && r.status !== "Closed").length,
+                atRisk:   aRequests.filter(r => r.slaStatus === "AtRisk"   && r.status !== "Resolved" && r.status !== "Closed").length,
+                breached: aRequests.filter(r => r.slaStatus === "Breached" && r.status !== "Resolved" && r.status !== "Closed").length,
+                resolved: aRequests.filter(r => r.status === "Resolved" || r.status === "Closed").length
+            };
         },
 
         _sortBySla(aRequests) {
             const order = { Breached: 0, AtRisk: 1, OnTrack: 2 };
             return [...aRequests].sort((a, b) => {
-                const slaA = order[a.slaStatus] ?? 3;
-                const slaB = order[b.slaStatus] ?? 3;
-                if (slaA !== slaB) return slaA - slaB;
+                const diff = (order[a.slaStatus] ?? 3) - (order[b.slaStatus] ?? 3);
+                if (diff !== 0) return diff;
                 return new Date(a.expectedResolutionTimestamp) - new Date(b.expectedResolutionTimestamp);
             });
         },
 
         _applyFilter() {
-            const oViewModel = this.getModel("viewModel");
-            let aFiltered = [...(this._allRequests || [])];
+            let aFiltered = [...(this._allMyRequests || [])];
 
             if (this._sCurrentFilter && this._sCurrentFilter !== "All") {
                 aFiltered = aFiltered.filter(r => r.slaStatus === this._sCurrentFilter);
             }
 
             if (this._sSearchText) {
-                const sQuery = this._sSearchText.toLowerCase();
+                const q = this._sSearchText.toLowerCase();
                 aFiltered = aFiltered.filter(r =>
-                    (r.requestNumber && r.requestNumber.toLowerCase().includes(sQuery)) ||
-                    (r.asset && r.asset.assetTag && r.asset.assetTag.toLowerCase().includes(sQuery)) ||
-                    (r.issueDescription && r.issueDescription.toLowerCase().includes(sQuery)) ||
-                    (r.raisedBy && r.raisedBy.name && r.raisedBy.name.toLowerCase().includes(sQuery)) ||
-                    (r.issueCategory && r.issueCategory.toLowerCase().includes(sQuery))
+                    [r.requestNumber, r.asset?.assetTag, r.issueDescription,
+                     r.raisedBy?.name, r.issueCategory]
+                        .some(v => v && v.toLowerCase().includes(q))
                 );
             }
 
-            oViewModel.setProperty("/filteredRequests", aFiltered);
+            this.getModel("viewModel").setProperty("/filteredRequests", aFiltered);
         },
 
-        _buildKpiHtml(oStats) {
-            if (!oStats) return;
+        _buildKpiHtml(oStats, sTechName) {
             const html = `
                 <div class="summaryStrip">
                     <div class="kpiCard">
                         <span class="kpiNumber">${oStats.total}</span>
-                        <span class="kpiLabel">Total</span>
+                        <span class="kpiLabel">My Tickets</span>
                     </div>
                     <div class="kpiCard kpiAtRisk">
                         <span class="kpiNumber">${oStats.atRisk}</span>
@@ -89,7 +98,7 @@ sap.ui.define([
                         <span class="kpiLabel">Breached</span>
                     </div>
                     <div class="kpiCard">
-                        <span class="kpiNumber">${oStats.resolved || 0}</span>
+                        <span class="kpiNumber">${oStats.resolved}</span>
                         <span class="kpiLabel">Resolved</span>
                     </div>
                 </div>`;
@@ -117,9 +126,7 @@ sap.ui.define([
         },
 
         onTicketPress(oEvent) {
-            const oCtx = oEvent.getSource().getBindingContext("viewModel");
-            if (!oCtx) return;
-            const oRequest = oCtx.getObject();
+            const oRequest = oEvent.getSource().getBindingContext("viewModel").getObject();
             this.getRouter().navTo("ticketDetail", { requestId: oRequest.requestId });
         },
 
