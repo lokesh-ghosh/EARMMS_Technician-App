@@ -83,13 +83,13 @@ sap.ui.define([
             steps.forEach((step, idx) => {
                 const isDone    = idx < currentIdx;
                 const isCurrent = idx === currentIdx;
-                const lineColor = isDone ? "#0057D6" : "#E0E0E0";
+                const lineColor = isDone ? "#2563eb" : "#e2e8f0";
 
-                const dotBg    = isDone ? "#0057D6" : (isCurrent ? "#002E6E" : "#E0E0E0");
-                const dotColor = (isDone || isCurrent) ? "#FFFFFF" : "#9E9E9E";
-                const dotShadow = isCurrent ? "0 0 0 3px rgba(0,87,214,0.25)" : "none";
-                const labelColor = isDone ? "#0057D6" : (isCurrent ? "#002E6E" : "#9E9E9E");
-                const labelWeight = isCurrent ? "600" : "400";
+                const dotBg    = isDone ? "#2563eb" : (isCurrent ? "#0f172a" : "#e2e8f0");
+                const dotColor = (isDone || isCurrent) ? "#ffffff" : "#94a3b8";
+                const dotShadow = isCurrent ? "0 0 0 4px rgba(37,99,235,0.20)" : "none";
+                const labelColor = isDone ? "#2563eb" : (isCurrent ? "#0f172a" : "#94a3b8");
+                const labelWeight = isCurrent ? "700" : "500";
 
                 html += `<div style="flex:1;text-align:center;position:relative;">`;
                 if (idx < steps.length - 1) {

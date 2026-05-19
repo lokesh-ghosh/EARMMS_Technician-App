@@ -1,61 +1,225 @@
-/* =====================================================
-   EARMMS Technician App – Modern Design System
-   SAP Fiori / UI5 Custom Stylesheet
-   ===================================================== */
+/* ═══════════════════════════════════════════════════════════════
+   EARMMS Technician App — "Midnight Command" Design System
+   Theme: Premium enterprise dashboard — SAP Fiori Horizon base
+   ═══════════════════════════════════════════════════════════════ */
 
-/* ── Page & Background ── */
+/* ── Design Tokens ────────────────────────────────────────────── */
+:root {
+    --mc-navy:          #0f172a;
+    --mc-navy-mid:      #0b2558;
+    --mc-blue:          #2563eb;
+    --mc-blue-dark:     #1d4ed8;
+    --mc-blue-glow:     #60a5fa;
+    --mc-blue-light:    #dbeafe;
+    --mc-bg:            linear-gradient(160deg, #f1f5f9 0%, #e8eef8 100%);
+    --mc-surface:       #ffffff;
+    --mc-border:        #e2e8f0;
+    --mc-text:          #0f172a;
+    --mc-muted:         #64748b;
+    --mc-success:       #16a34a;
+    --mc-error:         #dc2626;
+    --mc-warning:       #d97706;
+    --mc-info:          #2563eb;
+    --mc-shadow-card:   0 1px 4px rgba(0,0,0,0.06), 0 4px 18px rgba(37,99,235,0.07);
+    --mc-shadow-hover:  0 8px 30px rgba(37,99,235,0.18), 0 2px 8px rgba(0,0,0,0.06);
+    --mc-shadow-tile:   0 2px 8px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
+    --mc-shadow-btn:    0 2px 10px rgba(37,99,235,0.35);
+    --mc-ease:          cubic-bezier(0.4, 0, 0.2, 1);
+    --mc-radius-card:   16px;
+    --mc-radius-tile:   18px;
+    --mc-radius-filter: 14px;
+    --mc-radius-pill:   99px;
+}
+
+/* ── Global font smoothing ────────────────────────────────────── */
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+/* ── Entrance animation ───────────────────────────────────────── */
+@keyframes mcFadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Custom scrollbar ─────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(37,99,235,0.22); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(37,99,235,0.42); }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   PAGE & BACKGROUND
+   ═══════════════════════════════════════════════════════════════ */
+.earmmsBgPage,
 .earmmsBgPage > .sapMPageScroll,
-.earmmsBgPage > .sapMPageScrollContent {
-    background-color: #F2F4F8 !important;
+.earmmsBgPage > .sapMPageScrollContent,
+.earmmsBgPage .sapMPageBgSolid {
+    background: var(--mc-bg) !important;
+}
+.detailPage,
+.detailPage > .sapMPageScroll,
+.detailPage > .sapMPageScrollContent {
+    background: var(--mc-bg) !important;
 }
 
-/* ── Gradient Header ── */
-.earmmsGradientHeader {
-    background: linear-gradient(135deg, #002E6E 0%, #0057D6 100%) !important;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.25) !important;
+
+/* ═══════════════════════════════════════════════════════════════
+   HEADER — deep multi-stop blue gradient
+   ═══════════════════════════════════════════════════════════════ */
+.earmmsGradientHeader,
+.earmmsGradientHeader.sapMBar,
+.earmmsGradientHeader.sapMIBar {
+    background: linear-gradient(100deg, #060f23 0%, #0b2558 30%, #0d3b8a 65%, #1251c5 100%) !important;
+    box-shadow: 0 2px 20px rgba(6,15,35,0.55) !important;
+    border-bottom: none !important;
 }
+
+/* All text / icons inside the gradient header → white */
 .earmmsGradientHeader .sapMTitle,
+.earmmsGradientHeader .sapMLabelBase,
 .earmmsGradientHeader .sapMText,
 .earmmsGradientHeader .sapMBtnIcon,
-.earmmsGradientHeader .sapMBtnContent {
-    color: #FFFFFF !important;
+.earmmsGradientHeader .sapMBtnContent,
+.earmmsGradientHeader .sapMObjStatusText,
+.earmmsGradientHeader .sapMObjStatusIcon,
+.earmmsGradientHeader .sapUiIcon {
+    color: rgba(255,255,255,0.92) !important;
 }
 
-/* ── Summary KPI Strip (sits inside header gradient) ── */
-.summaryStrip {
-    background: linear-gradient(135deg, #002E6E 0%, #0057D6 100%);
-    padding: 0 1rem 1.1rem 1rem;
-    display: flex;
-    gap: 0.6rem;
+/* Back-button / header-icon buttons */
+.earmmsGradientHeader .sapMBtn {
+    background: rgba(255,255,255,0.08) !important;
+    border-radius: 8px !important;
+    border: 1px solid rgba(255,255,255,0.14) !important;
+    transition: background var(--mc-ease) 0.18s !important;
 }
+.earmmsGradientHeader .sapMBtn:hover {
+    background: rgba(255,255,255,0.16) !important;
+}
+
+/* Avatar ring inside header */
+.earmmsGradientHeader .sapMAvatar {
+    border: 2px solid rgba(255,255,255,0.30) !important;
+}
+
+/* ObjectStatus "pill" in header (ticket status) */
+.earmmsGradientHeader .sapMObjStatus {
+    border-radius: var(--mc-radius-pill) !important;
+    padding: 2px 10px !important;
+    font-size: 0.7rem !important;
+    font-weight: 600 !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   KPI SUMMARY STRIP (lives inside header gradient)
+   ═══════════════════════════════════════════════════════════════ */
+.summaryStrip {
+    background: linear-gradient(100deg, #060f23 0%, #0b2558 30%, #0d3b8a 65%, #1251c5 100%);
+    padding: 0 1.5rem 1.35rem;
+    display: flex;
+    gap: 0.75rem;
+}
+
 .kpiCard {
     flex: 1;
-    background: rgba(255,255,255,0.13);
-    border-radius: 10px;
-    padding: 0.65rem 0.5rem;
+    background: rgba(255,255,255,0.10);
+    border-radius: var(--mc-radius-tile);
+    padding: 0.8rem 0.6rem;
     text-align: center;
-    border: 1px solid rgba(255,255,255,0.22);
-    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255,255,255,0.18);
+    backdrop-filter: blur(6px);
+    transition: transform var(--mc-ease) 0.22s, background var(--mc-ease) 0.22s;
 }
+.kpiCard:hover {
+    transform: translateY(-3px);
+    background: rgba(255,255,255,0.16);
+}
+
 .kpiNumber {
     display: block;
-    font-size: 1.55rem;
-    font-weight: 700;
-    color: #FFFFFF;
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #ffffff;
     line-height: 1.1;
+    letter-spacing: -0.5px;
 }
 .kpiLabel {
     display: block;
     font-size: 0.6rem;
-    color: rgba(255,255,255,0.78);
+    color: rgba(255,255,255,0.72);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-top: 0.2rem;
+    letter-spacing: 0.6px;
+    margin-top: 0.25rem;
+    font-weight: 700;
 }
-.kpiAtRisk  .kpiNumber { color: #FFD54F; }
-.kpiBreached .kpiNumber { color: #FF8A65; }
 
-/* ── List item reset ── */
+/* Accent colours for At-Risk / Breached KPI numbers */
+.kpiAtRisk  .kpiNumber { color: #fde68a; }
+.kpiBreached .kpiNumber { color: #fca5a5; }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   SEARCH FIELD
+   ═══════════════════════════════════════════════════════════════ */
+.sapMSB {
+    border-radius: 10px !important;
+    border: 1.5px solid var(--mc-border) !important;
+    box-shadow: var(--mc-shadow-tile) !important;
+    margin: 0.65rem 1rem !important;
+    background: var(--mc-surface) !important;
+    transition: border-color var(--mc-ease) 0.18s, box-shadow var(--mc-ease) 0.18s !important;
+}
+.sapMSB:focus-within,
+.sapMSBFocused {
+    border-color: var(--mc-blue) !important;
+    box-shadow: 0 0 0 4px rgba(37,99,235,0.13), var(--mc-shadow-tile) !important;
+}
+.sapMSB .sapMSBH { border: none !important; background: transparent !important; }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   ICON TAB BAR (filter strip)
+   ═══════════════════════════════════════════════════════════════ */
+.sapMITB  { background: transparent !important; border-bottom: none !important; }
+.sapMITBHead { background: transparent !important; padding: 0 0.75rem !important; }
+
+.sapMITBFilter {
+    border-radius: var(--mc-radius-filter) !important;
+    transition: background var(--mc-ease) 0.18s !important;
+}
+.sapMITBFilter.sapMITBFilterSelected,
+.sapMITBFilter[aria-selected="true"] {
+    background: rgba(37,99,235,0.10) !important;
+}
+.sapMITBFilter .sapMITBText {
+    font-size: 0.82rem !important;
+    font-weight: 600 !important;
+    color: var(--mc-muted) !important;
+}
+.sapMITBFilter.sapMITBFilterSelected .sapMITBText,
+.sapMITBFilter[aria-selected="true"] .sapMITBText {
+    color: var(--mc-blue) !important;
+}
+.sapMITBFilter .sapMITBCount {
+    background: rgba(37,99,235,0.12) !important;
+    color: var(--mc-blue) !important;
+    border-radius: var(--mc-radius-pill) !important;
+    font-weight: 700 !important;
+    font-size: 0.68rem !important;
+}
+.sapMITBFilterSelected .sapMITBCount {
+    background: var(--mc-blue) !important;
+    color: #fff !important;
+}
+/* Selected underline → blue */
+.sapMITBFilter.sapMITBFilterSelected::after,
+.sapMITBSel { background: var(--mc-blue) !important; border-radius: 99px !important; }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   LIST ITEM RESET (earmmsList)
+   ═══════════════════════════════════════════════════════════════ */
 .earmmsList > .sapMListItems > .sapMLIB,
 .earmmsList > .sapMListUl > .sapMLIB {
     background: transparent !important;
@@ -72,315 +236,589 @@
     padding: 0 !important;
 }
 
-/* ── Ticket Card ── */
+
+/* ═══════════════════════════════════════════════════════════════
+   TICKET CARDS
+   ═══════════════════════════════════════════════════════════════ */
 .ticketCard {
-    background: #FFFFFF;
-    border-radius: 10px;
-    margin: 0.4rem 0.85rem;
+    background: var(--mc-surface);
+    border-radius: var(--mc-radius-card);
+    margin: 0.45rem 1rem;
     overflow: hidden;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.09), 0 1px 2px rgba(0,0,0,0.05);
-    transition: box-shadow 0.18s, transform 0.12s;
+    box-shadow: var(--mc-shadow-card);
+    transition: transform var(--mc-ease) 0.22s, box-shadow var(--mc-ease) 0.22s;
     cursor: pointer;
     border-left: 4px solid transparent;
+    animation: mcFadeUp 0.35s var(--mc-ease) both;
 }
-.ticketCard:active { transform: scale(0.985); box-shadow: 0 1px 2px rgba(0,0,0,0.07); }
+.ticketCard:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--mc-shadow-hover);
+}
+.ticketCard:active { transform: scale(0.988); }
 
-.slaOnTrack  { border-left-color: #107E3E !important; }
-.slaAtRisk   { border-left-color: #E65100 !important; }
+/* SLA left-border accent */
+.slaOnTrack  { border-left-color: var(--mc-success) !important; }
+.slaAtRisk   { border-left-color: var(--mc-warning) !important; }
 .slaBreached {
-    border-left-color: #C62828 !important;
-    animation: pulseBorder 2s ease-in-out infinite;
+    border-left-color: var(--mc-error) !important;
+    animation: mcFadeUp 0.35s var(--mc-ease) both, mcPulseBorder 2.2s ease-in-out infinite;
 }
-@keyframes pulseBorder {
-    0%, 100% { border-left-color: #C62828; }
-    50%       { border-left-color: #FF5252; }
+@keyframes mcPulseBorder {
+    0%, 100% { border-left-color: #dc2626; }
+    50%       { border-left-color: #f87171; }
 }
 
-.ticketCardInner { padding: 0.7rem 0.85rem; }
+.ticketCardInner { padding: 1rem 1.25rem; }
 
 /* ── Ticket Number ── */
 .ticketNumber {
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     font-weight: 700;
-    color: #0057D6;
-    font-family: 'Courier New', monospace;
+    color: var(--mc-blue);
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    letter-spacing: 0.2px;
 }
 
-/* ── Severity / SLA / Status Badges ── */
-.badgeBase {
-    display: inline-block;
-    border-radius: 4px;
-    padding: 0.1rem 0.45rem;
-    font-size: 0.64rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
-    line-height: 1.5;
-}
-.badgeHigh     { background:#FFEBEE; color:#C62828; border:1px solid #EF9A9A; }
-.badgeMedium   { background:#FFF3E0; color:#E65100; border:1px solid #FFB74D; }
-.badgeLow      { background:#E8F5E9; color:#2E7D32; border:1px solid #A5D6A7; }
-.badgeOnTrack  { background:#E8F5E9; color:#1B5E20; border:1px solid #A5D6A7; }
-.badgeAtRisk   { background:#FFF8E1; color:#E65100; border:1px solid #FFE082; }
-.badgeBreached { background:#FFEBEE; color:#B71C1C; border:1px solid #EF9A9A; }
-.badgeOpen     { background:#F5F5F5; color:#424242; border:1px solid #E0E0E0; }
-.badgeAssigned { background:#E3F2FD; color:#1565C0; border:1px solid #90CAF9; }
-.badgeInProgress { background:#EDE7F6; color:#4527A0; border:1px solid #CE93D8; }
-.badgeResolved { background:#E8F5E9; color:#1B5E20; border:1px solid #A5D6A7; }
-.badgeClosed   { background:#F5F5F5; color:#616161; border:1px solid #BDBDBD; }
+/* ── Asset info ── */
+.assetTag   { font-size: 0.78rem; font-weight: 700; color: var(--mc-text); }
+.assetModel { font-size: 0.74rem; color: var(--mc-muted); }
 
-/* ── Asset Row ── */
-.assetTag {
-    font-size: 0.78rem;
-    font-weight: 600;
-    color: #1D2D3E;
-}
-.assetModel {
-    font-size: 0.74rem;
-    color: #6A6D70;
-}
+/* ── Category pill ── */
 .categoryPill {
-    font-size: 0.68rem;
-    background: #EEF2FF;
-    color: #3730A3;
-    border-radius: 20px;
-    padding: 0.15rem 0.55rem;
-    border: 1px solid #C7D2FE;
+    font-size: 0.67rem;
+    font-weight: 700;
+    background: var(--mc-blue-light);
+    color: var(--mc-blue-dark);
+    border-radius: var(--mc-radius-pill);
+    padding: 0.18rem 0.65rem;
+    border: 1px solid rgba(37,99,235,0.20);
+    letter-spacing: 0.2px;
 }
 
 /* ── Description ── */
 .ticketDescription {
     font-size: 0.8rem;
-    color: #6A6D70;
-    line-height: 1.45;
+    color: var(--mc-muted);
+    line-height: 1.5;
 }
 
-/* ── Ticket Footer Row ── */
+/* ── Ticket footer ── */
 .ticketFooter {
-    border-top: 1px solid #F2F2F2;
-    padding-top: 0.45rem;
-    margin-top: 0.45rem;
+    border-top: 1px solid var(--mc-border);
+    padding-top: 0.5rem;
+    margin-top: 0.5rem;
 }
-.timeInfo    { font-size: 0.73rem; color: #6A6D70; }
-.timeOnTrack { color: #2E7D32; font-weight: 500; }
-.timeAtRisk  { color: #E65100; font-weight: 600; }
-.timeBreached { color: #C62828; font-weight: 700; }
+.timeInfo    { font-size: 0.72rem; color: var(--mc-muted); font-weight: 500; }
+.timeOnTrack { color: var(--mc-success); font-weight: 600; }
+.timeAtRisk  { color: var(--mc-warning); font-weight: 700; }
+.timeBreached { color: var(--mc-error); font-weight: 700; }
 
-/* ── Empty State ── */
-.emptyStateContainer {
-    text-align: center;
-    padding: 4rem 1.5rem;
+
+/* ═══════════════════════════════════════════════════════════════
+   OBJECTIVE STATUS OVERRIDES (Severity / SLA / Status badges)
+   All → pill-shaped
+   ═══════════════════════════════════════════════════════════════ */
+.sapMObjStatus {
+    border-radius: var(--mc-radius-pill) !important;
+    padding: 2px 10px !important;
+    font-size: 0.67rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.3px !important;
+    transition: box-shadow var(--mc-ease) 0.18s !important;
 }
-.emptyStateIcon { font-size: 3rem; color: #BDBDBD; display: block; margin-bottom: 1rem; }
-.emptyStateTitle { font-size: 1rem; color: #424242; font-weight: 600; display: block; margin-bottom: 0.4rem; }
-.emptyStateMsg   { font-size: 0.82rem; color: #9E9E9E; }
 
-/* ── VIP Badge ── */
+/* Inverted (solid fill) states */
+.sapMObjStatus.sapMObjStatusStateError.sapMObjStatusInverted {
+    background: var(--mc-error) !important;
+    color: #fff !important;
+    border: none !important;
+}
+.sapMObjStatus.sapMObjStatusStateWarning.sapMObjStatusInverted {
+    background: var(--mc-warning) !important;
+    color: #fff !important;
+    border: none !important;
+}
+.sapMObjStatus.sapMObjStatusStateSuccess.sapMObjStatusInverted {
+    background: var(--mc-success) !important;
+    color: #fff !important;
+    border: none !important;
+}
+.sapMObjStatus.sapMObjStatusStateInformation.sapMObjStatusInverted {
+    background: var(--mc-blue) !important;
+    color: #fff !important;
+    border: none !important;
+}
+.sapMObjStatus.sapMObjStatusStateNone.sapMObjStatusInverted {
+    background: #94a3b8 !important;
+    color: #fff !important;
+    border: none !important;
+}
+
+/* Non-inverted (tinted) states */
+.sapMObjStatus.sapMObjStatusStateError:not(.sapMObjStatusInverted) {
+    background: #fff1f2 !important; color: var(--mc-error) !important;
+    border: 1.5px solid rgba(220,38,38,0.25) !important;
+}
+.sapMObjStatus.sapMObjStatusStateWarning:not(.sapMObjStatusInverted) {
+    background: #fffbeb !important; color: var(--mc-warning) !important;
+    border: 1.5px solid rgba(217,119,6,0.25) !important;
+}
+.sapMObjStatus.sapMObjStatusStateSuccess:not(.sapMObjStatusInverted) {
+    background: #f0fdf4 !important; color: var(--mc-success) !important;
+    border: 1.5px solid rgba(22,163,74,0.25) !important;
+}
+.sapMObjStatus.sapMObjStatusStateInformation:not(.sapMObjStatusInverted) {
+    background: #eff6ff !important; color: var(--mc-blue) !important;
+    border: 1.5px solid rgba(37,99,235,0.20) !important;
+}
+.sapMObjStatus.sapMObjStatusStateNone:not(.sapMObjStatusInverted) {
+    background: #f1f5f9 !important; color: #64748b !important;
+    border: 1.5px solid #cbd5e1 !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   STANDALONE BADGE CLASSES (kept for direct use)
+   ═══════════════════════════════════════════════════════════════ */
+.badgeBase {
+    display: inline-block;
+    border-radius: var(--mc-radius-pill);
+    padding: 0.15rem 0.6rem;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+.badgeHigh     { background: #fff1f2; color: #b91c1c; border: 1.5px solid rgba(220,38,38,0.25); }
+.badgeMedium   { background: #fffbeb; color: #b45309; border: 1.5px solid rgba(217,119,6,0.25); }
+.badgeLow      { background: #f0fdf4; color: #15803d; border: 1.5px solid rgba(22,163,74,0.25); }
+.badgeOnTrack  { background: #f0fdf4; color: #15803d; border: 1.5px solid rgba(22,163,74,0.25); }
+.badgeAtRisk   { background: #fffbeb; color: #b45309; border: 1.5px solid rgba(217,119,6,0.25); }
+.badgeBreached { background: #fff1f2; color: #b91c1c; border: 1.5px solid rgba(220,38,38,0.25); }
+.badgeOpen     { background: #f8fafc; color: #475569; border: 1.5px solid #e2e8f0; }
+.badgeAssigned { background: #eff6ff; color: #1d4ed8; border: 1.5px solid rgba(37,99,235,0.20); }
+.badgeInProgress { background: #f5f3ff; color: #6d28d9; border: 1.5px solid rgba(109,40,217,0.20); }
+.badgeResolved { background: #f0fdf4; color: #15803d; border: 1.5px solid rgba(22,163,74,0.25); }
+.badgeClosed   { background: #f8fafc; color: #64748b; border: 1.5px solid #e2e8f0; }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   VIP BADGE
+   ═══════════════════════════════════════════════════════════════ */
 .vipBadge {
     display: inline-flex;
     align-items: center;
     gap: 0.25rem;
-    background: linear-gradient(90deg, #FFD700, #FFA000);
-    color: #4A2E00;
-    border-radius: 20px;
-    padding: 0.15rem 0.6rem;
-    font-size: 0.68rem;
-    font-weight: 700;
-    letter-spacing: 0.3px;
+    background: linear-gradient(90deg, #b45309, #d97706, #f59e0b);
+    color: #fff;
+    border-radius: var(--mc-radius-pill);
+    padding: 0.2rem 0.75rem;
+    font-size: 0.66rem;
+    font-weight: 800;
+    letter-spacing: 0.4px;
+    box-shadow: 0 2px 8px rgba(180,83,9,0.35);
 }
 
-/* ── Detail Page ── */
-.detailPage { background-color: #F2F4F8 !important; }
 
-/* ── Status Progress ── */
-.statusProgressWrap {
-    background: #FFFFFF;
-    padding: 1rem 0.5rem 0.8rem;
-    border-radius: 10px;
-    margin: 0.4rem 0.85rem;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.07);
-}
-.progressStepWrap {
-    flex: 1;
+/* ═══════════════════════════════════════════════════════════════
+   EMPTY STATE
+   ═══════════════════════════════════════════════════════════════ */
+.emptyStateContainer {
     text-align: center;
-    position: relative;
+    padding: 4.5rem 1.5rem;
+    animation: mcFadeUp 0.35s var(--mc-ease) both;
 }
-.progressLine {
-    position: absolute;
-    top: 14px;
-    left: 50%;
-    width: 100%;
-    height: 2px;
-    background: #E0E0E0;
-    z-index: 0;
-}
-.progressLineDone { background: #0057D6; }
-.stepCircle {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: #E0E0E0;
-    color: #9E9E9E;
-    font-size: 0.65rem;
-    font-weight: 700;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    z-index: 1;
-    margin-bottom: 0.3rem;
-}
-.stepCircle.stepDone    { background: #0057D6; color: #FFF; }
-.stepCircle.stepCurrent { background: #002E6E; color: #FFF; box-shadow: 0 0 0 3px rgba(0,87,214,0.25); }
-.stepCircleLabel {
-    font-size: 0.6rem;
-    color: #9E9E9E;
-    display: block;
-    line-height: 1.2;
-}
-.stepCircleLabel.done    { color: #0057D6; }
-.stepCircleLabel.current { color: #002E6E; font-weight: 600; }
+.emptyStateIcon  { font-size: 3.5rem; color: #cbd5e1; display: block; margin-bottom: 1rem; }
+.emptyStateTitle { font-size: 1rem; color: var(--mc-text); font-weight: 700; display: block; margin-bottom: 0.4rem; }
+.emptyStateMsg   { font-size: 0.82rem; color: var(--mc-muted); }
 
-/* ── Info Cards (Detail view) ── */
-.infoCard {
-    background: #FFFFFF;
-    border-radius: 10px;
-    margin: 0.4rem 0.85rem;
-    overflow: hidden;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.07);
+
+/* ═══════════════════════════════════════════════════════════════
+   DETAIL PAGE — STATUS PROGRESS
+   ═══════════════════════════════════════════════════════════════ */
+.statusProgressWrap {
+    background: var(--mc-surface);
+    padding: 1.1rem 0.5rem 0.9rem;
+    border-radius: var(--mc-radius-card);
+    margin: 0.5rem 1rem;
+    box-shadow: var(--mc-shadow-card);
+    animation: mcFadeUp 0.35s var(--mc-ease) both;
 }
+
+/* Step dots / lines are rendered via inline HTML in the controller —
+   CSS variables are referenced there; the controller uses hard-coded
+   values matching the palette below. */
+.stepCircle { border-radius: 50%; }
+.stepCircle.stepDone    { background: var(--mc-blue) !important; color: #fff !important; }
+.stepCircle.stepCurrent { background: var(--mc-navy) !important; color: #fff !important;
+    box-shadow: 0 0 0 4px rgba(37,99,235,0.20) !important; }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   INFO CARDS (Detail view)
+   ═══════════════════════════════════════════════════════════════ */
+.infoCard {
+    background: var(--mc-surface);
+    border-radius: var(--mc-radius-card);
+    margin: 0.45rem 1rem;
+    overflow: hidden;
+    box-shadow: var(--mc-shadow-card);
+    transition: transform var(--mc-ease) 0.22s, box-shadow var(--mc-ease) 0.22s;
+    animation: mcFadeUp 0.35s var(--mc-ease) both;
+}
+.infoCard:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--mc-shadow-hover);
+}
+
 .infoCardHeader {
-    padding: 0.65rem 1rem 0.5rem;
-    border-bottom: 1px solid #F3F3F3;
+    padding: 0.8rem 1.25rem 0.65rem;
+    border-bottom: 1px solid var(--mc-border);
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.65rem;
+    background: linear-gradient(90deg, #f8faff 0%, #f1f5f9 100%);
 }
+
 .infoCardIconWrap {
-    width: 32px; height: 32px;
-    border-radius: 8px;
+    width: 34px; height: 34px;
+    border-radius: 10px;
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
 }
-.iconBlueBg  { background: #E3F2FD; }
-.iconGreenBg { background: #E8F5E9; }
-.iconPurpleBg { background: #EDE7F6; }
-.iconOrangeBg { background: #FFF3E0; }
+.iconBlueBg   { background: linear-gradient(135deg, #dbeafe, #bfdbfe); }
+.iconGreenBg  { background: linear-gradient(135deg, #dcfce7, #bbf7d0); }
+.iconPurpleBg { background: linear-gradient(135deg, #ede9fe, #ddd6fe); }
+.iconOrangeBg { background: linear-gradient(135deg, #ffedd5, #fed7aa); }
+
 .infoCardTitle {
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: #1D2D3E;
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: var(--mc-navy);
     text-transform: uppercase;
-    letter-spacing: 0.6px;
+    letter-spacing: 0.7px;
 }
-.infoCardBody { padding: 0.5rem 1rem 0.8rem; }
+
+.infoCardBody { padding: 0.6rem 1.25rem 1rem; }
+
 .infoRow {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 0.35rem 0;
-    border-bottom: 1px solid #F8F8F8;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid #f8fafc;
 }
 .infoRow:last-child { border-bottom: none; }
+
 .infoLabel {
-    font-size: 0.73rem;
-    color: #8C8C8C;
-    font-weight: 500;
+    font-size: 0.72rem;
+    color: var(--mc-muted);
+    font-weight: 600;
     min-width: 38%;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
 }
 .infoValue {
-    font-size: 0.78rem;
-    color: #1D2D3E;
-    font-weight: 500;
+    font-size: 0.8rem;
+    color: var(--mc-text);
+    font-weight: 600;
     text-align: right;
     max-width: 58%;
     word-break: break-word;
 }
 .infoDescValue {
-    font-size: 0.78rem;
-    color: #3D3D3D;
-    line-height: 1.5;
-    margin-top: 0.3rem;
+    font-size: 0.8rem;
+    color: #334155;
+    line-height: 1.6;
+    margin-top: 0.35rem;
 }
 
-/* ── SLA Highlight Card ── */
-.slaHighCard {
-    border-radius: 10px;
-    margin: 0.4rem 0.85rem;
-    overflow: hidden;
-    padding: 1.1rem;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.13);
+/* Link inside infoRow */
+.infoRow .sapMLnk,
+.infoRow .sapMLnk:visited {
+    color: var(--mc-blue) !important;
+    font-size: 0.78rem !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
 }
-.slaCardOnTrack  { background: linear-gradient(135deg, #1B5E20, #2E7D32); }
-.slaCardAtRisk   { background: linear-gradient(135deg, #BF360C, #E65100); }
-.slaCardBreached { background: linear-gradient(135deg, #7B1515, #C62828); }
+.infoRow .sapMLnk:hover { text-decoration: underline !important; }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   SLA HIGHLIGHT CARD (gradient fill)
+   ═══════════════════════════════════════════════════════════════ */
+.slaHighCard {
+    border-radius: var(--mc-radius-tile);
+    margin: 0.45rem 1rem;
+    overflow: hidden;
+    padding: 1.2rem 1.5rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.18);
+    animation: mcFadeUp 0.35s var(--mc-ease) both;
+    transition: transform var(--mc-ease) 0.22s;
+}
+.slaHighCard:hover { transform: translateY(-2px); }
+
+.slaCardOnTrack  { background: linear-gradient(135deg, #14532d 0%, #16a34a 60%, #22c55e 100%); }
+.slaCardAtRisk   { background: linear-gradient(135deg, #78350f 0%, #d97706 60%, #f59e0b 100%); }
+.slaCardBreached { background: linear-gradient(135deg, #7f1d1d 0%, #dc2626 60%, #ef4444 100%); }
 
 .slaCardLabel {
-    font-size: 0.68rem;
-    color: rgba(255,255,255,0.75);
+    font-size: 0.65rem;
+    color: rgba(255,255,255,0.72);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.7px;
     display: block;
-    margin-bottom: 0.3rem;
+    font-weight: 700;
+    margin-bottom: 0.35rem;
 }
 .slaCardStatusText {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #FFFFFF;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #ffffff;
     display: block;
+    letter-spacing: -0.2px;
 }
 .slaCardTime {
-    font-size: 0.78rem;
+    font-size: 0.8rem;
     color: rgba(255,255,255,0.85);
     display: block;
     margin-top: 0.2rem;
+    font-weight: 600;
 }
 .slaCardExpected {
-    font-size: 0.72rem;
+    font-size: 0.71rem;
     color: rgba(255,255,255,0.65);
-    margin-top: 0.6rem;
+    margin-top: 0.55rem;
     display: block;
+    font-weight: 500;
 }
 
-/* ── Resolution Card ── */
+
+/* ═══════════════════════════════════════════════════════════════
+   RESOLUTION CARD
+   ═══════════════════════════════════════════════════════════════ */
 .resolutionCard {
-    background: #E8F5E9;
-    border-radius: 10px;
-    margin: 0.4rem 0.85rem;
-    padding: 1rem;
-    border: 1px solid #A5D6A7;
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    border-radius: var(--mc-radius-card);
+    margin: 0.45rem 1rem;
+    padding: 1.1rem 1.25rem;
+    border: 1.5px solid rgba(22,163,74,0.25);
+    box-shadow: 0 2px 12px rgba(22,163,74,0.10);
+    animation: mcFadeUp 0.35s var(--mc-ease) both;
 }
 .resolvedTag {
     display: inline-flex;
     align-items: center;
-    gap: 0.3rem;
-    background: #107E3E;
-    color: #FFF;
-    border-radius: 20px;
-    padding: 0.2rem 0.75rem;
-    font-size: 0.76rem;
-    font-weight: 600;
-    margin-bottom: 0.65rem;
+    gap: 0.35rem;
+    background: var(--mc-success);
+    color: #fff;
+    border-radius: var(--mc-radius-pill);
+    padding: 0.25rem 0.9rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.3px;
+    box-shadow: 0 2px 8px rgba(22,163,74,0.30);
 }
 .resolutionText {
     font-size: 0.8rem;
-    color: #1B5E20;
-    line-height: 1.5;
+    color: #166534;
+    line-height: 1.6;
+    font-weight: 500;
 }
 
-/* ── Action Footer ── */
-.actionFooter { background: #FFFFFF; border-top: 1px solid #E5E5E5; }
 
-/* ── Dialog ── */
-.updateStatusDialog .sapMDialogHeader { background: #0057D6; }
-.updateStatusDialog .sapMDialogHeader .sapMTitle { color: #FFF; }
+/* ═══════════════════════════════════════════════════════════════
+   ACTION FOOTER (Ticket Detail)
+   ═══════════════════════════════════════════════════════════════ */
+.actionFooter,
+.actionFooter.sapMTB {
+    background: var(--mc-surface) !important;
+    border-top: 1px solid var(--mc-border) !important;
+    box-shadow: 0 -4px 16px rgba(37,99,235,0.08) !important;
+    padding: 0.5rem 1rem !important;
+}
 
-/* ── Responsive ── */
+/* Primary button (Emphasised) → pill + glow */
+.sapMBtn.sapMBtnEmphasized,
+.sapMBtn.sapMBtnEmphasized:hover,
+.actionFooter .sapMBtn.sapMBtnEmphasized {
+    border-radius: var(--mc-radius-pill) !important;
+    background: linear-gradient(90deg, var(--mc-blue-dark) 0%, var(--mc-blue) 100%) !important;
+    border: none !important;
+    box-shadow: var(--mc-shadow-btn) !important;
+    transition: transform var(--mc-ease) 0.18s, box-shadow var(--mc-ease) 0.18s !important;
+}
+.sapMBtn.sapMBtnEmphasized:hover {
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 16px rgba(37,99,235,0.45) !important;
+}
+.sapMBtn.sapMBtnEmphasized .sapMBtnContent,
+.sapMBtn.sapMBtnEmphasized .sapMBtnIcon {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+}
+
+/* Default (secondary) button in footer */
+.actionFooter .sapMBtn:not(.sapMBtnEmphasized) {
+    border-radius: var(--mc-radius-pill) !important;
+    border: 1.5px solid var(--mc-blue) !important;
+    background: rgba(37,99,235,0.05) !important;
+    transition: transform var(--mc-ease) 0.18s, background var(--mc-ease) 0.18s !important;
+}
+.actionFooter .sapMBtn:not(.sapMBtnEmphasized):hover {
+    background: rgba(37,99,235,0.10) !important;
+    transform: translateY(-1px) !important;
+}
+.actionFooter .sapMBtn:not(.sapMBtnEmphasized) .sapMBtnContent,
+.actionFooter .sapMBtn:not(.sapMBtnEmphasized) .sapMBtnIcon {
+    color: var(--mc-blue) !important;
+    font-weight: 700 !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   DIALOG OVERRIDES
+   ═══════════════════════════════════════════════════════════════ */
+.sapMDialog {
+    border-radius: 18px !important;
+    overflow: hidden !important;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.22) !important;
+}
+.sapMDialogHeader,
+.sapMDialogHdr {
+    background: linear-gradient(100deg, #060f23 0%, #0b2558 50%, #1251c5 100%) !important;
+    border-bottom: none !important;
+}
+.sapMDialogTitle,
+.sapMDialogHeader .sapMTitle,
+.sapMDialogHdr .sapMTitle {
+    color: #ffffff !important;
+    font-weight: 800 !important;
+    font-size: 1rem !important;
+    letter-spacing: -0.1px !important;
+}
+.sapMDialogSection { padding: 0 !important; }
+
+/* Dialog primary/begin button */
+.sapMDialogBeginButton .sapMBtn {
+    border-radius: var(--mc-radius-pill) !important;
+    background: linear-gradient(90deg, var(--mc-blue-dark), var(--mc-blue)) !important;
+    border: none !important;
+    box-shadow: var(--mc-shadow-btn) !important;
+}
+.sapMDialogBeginButton .sapMBtnContent { color: #fff !important; font-weight: 700 !important; }
+
+/* Dialog end/cancel button */
+.sapMDialogEndButton .sapMBtn {
+    border-radius: var(--mc-radius-pill) !important;
+    border: 1.5px solid var(--mc-border) !important;
+    background: var(--mc-surface) !important;
+}
+.sapMDialogEndButton .sapMBtnContent { color: var(--mc-muted) !important; font-weight: 600 !important; }
+
+/* Select inside dialog */
+.sapMDialog .sapMSelect {
+    border-radius: 10px !important;
+    border: 1.5px solid var(--mc-border) !important;
+}
+.sapMDialog .sapMSelect:focus,
+.sapMDialog .sapMSelectFocused {
+    border-color: var(--mc-blue) !important;
+    box-shadow: 0 0 0 3px rgba(37,99,235,0.12) !important;
+}
+
+/* TextArea inside dialog */
+.sapMDialog .sapMTextArea {
+    border-radius: 10px !important;
+    border: 1.5px solid var(--mc-border) !important;
+    font-size: 0.84rem !important;
+    line-height: 1.6 !important;
+    transition: border-color var(--mc-ease) 0.18s, box-shadow var(--mc-ease) 0.18s !important;
+}
+.sapMDialog .sapMTextArea:focus,
+.sapMDialog .sapMTextAreaFocused {
+    border-color: var(--mc-blue) !important;
+    box-shadow: 0 0 0 3px rgba(37,99,235,0.12) !important;
+}
+.sapMDialog .sapMTextAreaError { border-color: var(--mc-error) !important; }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   PROGRESS INDICATOR (if used)
+   ═══════════════════════════════════════════════════════════════ */
+.sapMPI .sapMPIBar { border-radius: 99px !important; overflow: hidden !important; }
+.sapMPI .sapMPIBarPositive { background: var(--mc-success) !important; border-radius: 99px !important; }
+.sapMPI .sapMPIBarNegative { background: var(--mc-error)   !important; border-radius: 99px !important; }
+.sapMPI .sapMPIBarCritical { background: var(--mc-warning) !important; border-radius: 99px !important; }
+.sapMPI .sapMPIBarNeutral  { background: var(--mc-blue)    !important; border-radius: 99px !important; }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   SIDEBAR — SAP TNT Navigation (if exposed via launchpad)
+   ═══════════════════════════════════════════════════════════════ */
+.sapTntSideNavigation,
+.sapTntToolHeader {
+    background: var(--mc-navy) !important;
+    border-right: 1px solid rgba(255,255,255,0.06) !important;
+}
+.sapTntNavLI .sapTntNavLIItem {
+    color: rgba(255,255,255,0.65) !important;
+    border-radius: 10px !important;
+    margin: 2px 8px !important;
+    transition: background var(--mc-ease) 0.18s !important;
+}
+.sapTntNavLI .sapTntNavLIItem:hover {
+    background: rgba(255,255,255,0.07) !important;
+    color: rgba(255,255,255,0.90) !important;
+}
+.sapTntNavLI .sapTntNavLIItemSelected,
+.sapTntNavLI .sapTntNavLIItem.sapTntNavLIItemSelected {
+    background: linear-gradient(90deg, #1e3a8a, #2563eb) !important;
+    color: #ffffff !important;
+    border-left: 3px solid var(--mc-blue-glow) !important;
+    box-shadow: 0 4px 16px rgba(37,99,235,0.35) !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   TABLE OVERRIDES (if tables are added later)
+   ═══════════════════════════════════════════════════════════════ */
+.sapMListTblHeaderCell,
+.sapMListTblHeader .sapMListTblCell {
+    background: linear-gradient(90deg, #f8faff 0%, #f1f5f9 100%) !important;
+    font-size: 0.72rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.6px !important;
+    color: var(--mc-muted) !important;
+    border-bottom: 2px solid var(--mc-border) !important;
+}
+.sapMListTbl .sapMLIB:nth-child(even) { background: #fafbff !important; }
+.sapMListTbl .sapMLIB:hover           { background: #eff6ff !important; }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE CENTERING
+   ═══════════════════════════════════════════════════════════════ */
 @media (min-width: 600px) {
-    .ticketCard, .infoCard, .slaHighCard, .statusProgressWrap, .resolutionCard {
-        max-width: 640px;
+    .ticketCard,
+    .infoCard,
+    .slaHighCard,
+    .statusProgressWrap,
+    .resolutionCard {
+        max-width: 680px;
         margin-left: auto !important;
         margin-right: auto !important;
     }
-    .summaryStrip { max-width: 640px; margin: 0 auto; }
+    .summaryStrip { max-width: 680px; margin-left: auto; margin-right: auto; }
+}
+
+@media (min-width: 1024px) {
+    .ticketCard,
+    .infoCard,
+    .slaHighCard,
+    .statusProgressWrap,
+    .resolutionCard { max-width: 760px; }
 }
